@@ -8,7 +8,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
 import com.qaprosoft.carina.demo.gui.pages.HomePage;
 
-public class FooterMenu extends AbstractUIObject {
+public class Topbar extends AbstractUIObject {
 	
 	@FindBy(linkText = "Home")
     private ExtendedWebElement homeLink;
@@ -33,8 +33,14 @@ public class FooterMenu extends AbstractUIObject {
 
     @FindBy(linkText = "Company")
     private ExtendedWebElement companyLink;
+    
+    @FindBy(xpath = "//a[contains(text(),'Signup')]")
+    private ExtendedWebElement signupButton;
+    
+    @FindBy(xpath = "//a[contains(text(),'Login')]")
+    private ExtendedWebElement loginButton;
 
-    public FooterMenu(WebDriver driver, SearchContext searchContext) {
+    public Topbar(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
