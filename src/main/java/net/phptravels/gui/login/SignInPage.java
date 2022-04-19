@@ -9,13 +9,16 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 public class SignInPage extends AbstractPage {
   protected WebDriver driver;
 
-  @FindBy(name = "email")
+  @FindBy(xpath = "//div[@class='form-group']/input[@name='email']")
   private ExtendedWebElement emailField;
   
-  @FindBy(name = "password")
+  @FindBy(xpath = "//div/input[@name='password']")
   private ExtendedWebElement passwordField;
   
-  @FindBy(xpath = "//button[@type='submit']")
+  @FindBy(xpath = "//div/input[@name='password']")
+  private ExtendedWebElement rememberMeCheckButton;
+  
+  @FindBy(xpath = "//div[@class = 'btn-box pt-3 pb-4']//button[@type='submit']")
   private ExtendedWebElement loginButton;
 
   public SignInPage(WebDriver driver){
