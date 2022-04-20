@@ -7,25 +7,22 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
 public class DashboardPage extends AbstractPage {
-  protected WebDriver driver;
 
-  @FindBy(tagName =  "h2")
-  private ExtendedWebElement messageTitle;
+    @FindBy(tagName = "h2")
+    private ExtendedWebElement messageTitle;
 
-
-  public DashboardPage(WebDriver driver){
-    super(driver);
-  }
-
- 
- public void compareTitle(){
-	 if (!driver.getTitle().equals("Hi, Demo Welcome Back")) {
-	      throw new IllegalStateException("This is not the dashboard of logged in user," +
-	            " current page is: " + driver.getCurrentUrl());
-	    }
- }
+    public DashboardPage(WebDriver driver) {
+        super(driver);
+    }
   
-  public String getMessageText() {
-    return messageTitle.getText();
-  }
+    public void compareTitle() {
+        if (!driver.getTitle().equals("Hi, Demo Welcome Back")) {
+            throw new IllegalStateException("This is not the dashboard of logged in user," +
+                    " current page is: " + driver.getCurrentUrl());
+        }
+    }
+
+    public String getMessageText() {
+        return messageTitle.getText();
+    }
 }

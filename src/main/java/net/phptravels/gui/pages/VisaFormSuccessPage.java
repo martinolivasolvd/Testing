@@ -9,15 +9,20 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import net.phptravels.gui.components.Topbar;
 
 public class VisaFormSuccessPage extends AbstractPage {
-	
-	 @FindBy(xpath = "//header[@class ='header-area']")
-	 	private Topbar topbar;
-	
-	 @FindBy(xpath = "//h2[text() ='Your visa form has been submitted']")
-	    private ExtendedWebElement messageTitle;
-	
-	public VisaFormSuccessPage(WebDriver driver){
-	    super(driver);
-	  }
 
-}
+    @FindBy(xpath = "//header[@class ='header-area']")
+    private Topbar topbar;
+
+    @FindBy(xpath = "//h2[text() ='Your visa form has been submitted']")
+    private ExtendedWebElement messageTitle;
+
+    public VisaFormSuccessPage(WebDriver driver) {
+        super(driver);
+    }
+    public boolean isVisaFormSubmittedMessagePresent() {
+        return messageTitle.isElementPresent();
+        }
+    }
+
+
+
