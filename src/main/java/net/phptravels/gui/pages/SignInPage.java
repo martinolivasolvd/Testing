@@ -1,4 +1,4 @@
-package net.phptravels.gui.login;
+package net.phptravels.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
 public class SignInPage extends AbstractPage {
-  protected WebDriver driver;
 
   @FindBy(xpath = "//div[@class='form-group']/input[@name='email']")
   private ExtendedWebElement emailField;
@@ -25,8 +24,12 @@ public class SignInPage extends AbstractPage {
     super(driver);
   }
 
-  public DashboardPage loginValidUser(String email, String password) {
+  public DashboardPage loginValidUser() {
+	  String email = "user@phptravels.com";
+	  String password = "demouser";
+	  emailField.click();
 	  emailField.type(email);
+	  passwordField.click();
 	  passwordField.type(password);
 	  loginButton.click();
    

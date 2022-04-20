@@ -1,4 +1,4 @@
-package net.phptravels.gui.login;
+package net.phptravels.gui.pages;
 
 import java.lang.invoke.MethodHandles;
 import org.openqa.selenium.WebDriver;
@@ -18,10 +18,10 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//header[@class ='header-area']")
     private Topbar topbar;
     
-    @FindBy(xpath ="//div//li[@data-position =1]")
+    @FindBy(xpath ="//button[@id = 'hotels-tab']//span[text() = ' Hotels']")
     private ExtendedWebElement hotelButton;
     
-    @FindBy(xpath = "//form[@id = 'hotels-search']//input[@data-select2-id = 1]")
+    @FindBy(xpath = "//form[@id = 'hotels-search']//span[@data-select2-id = 1]")
     private ExtendedWebElement hotelDestinationCombobox;
     
     @FindBy(xpath = "//form[@id = 'hotels-search']//input[@id = 'checkin']")
@@ -48,7 +48,7 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//form[@id = 'hotels-search']//button[@type = 'submit']")
     private ExtendedWebElement hotelSearchButton;
 
-    @FindBy(xpath = "//div//li[@data-position =2]")
+    @FindBy(xpath = "//button[@id = 'hotels-tab']//span[text() = ' flights']")
     private ExtendedWebElement flightButton;
     
     @FindBy(xpath = "//div[@id = 'flights']//input[@id = 'one-way']")
@@ -82,10 +82,10 @@ public class HomePage extends AbstractPage {
     private ExtendedWebElement flightsInfants;
     
     @FindBy( xpath = "//div[@class='autocomplete-wrapper _1 row_1']//div[@class = 'autocomplete-location']")
-    private ExtendedWebElement flightsFlyingFromSearch;
+    private ExtendedWebElement flightsFlyingFromSearchResult;
     
     @FindBy( xpath = "//div[@class='autocomplete-wrapper _1 row_2']//div[@class = 'autocomplete-location']")
-    private ExtendedWebElement flightsFlyingToSearch;
+    private ExtendedWebElement flightsFlyingToSearchResult;
     
     @FindBy(xpath = "//div[@id = 'flights']//button[@id = 'flights-search']")
     private ExtendedWebElement flightsSearchFlightButton;
@@ -141,88 +141,99 @@ public class HomePage extends AbstractPage {
     }
     
     
-    public void hotelSearchForm(String cityName, String checkin, String checkout, String rooms, String adults, String childs) {
-    	
+    public HotelsSearchResultPage hotelSearchForm(String cityName, String checkin, String checkout, String rooms, String adults, String childs) {
+    	String nationality = "Argentina";
     	hotelDestinationCombobox.click();
     	universalInputField.type(cityName);
     	universalSearchResult.click();
-    	
     	hotelCheckinDate.click();
     	hotelCheckinDate.type(checkin);
     	hotelCheckoutDate.click();
     	hotelCheckoutDate.type(checkout);
-    	
     	hotelTravellersCombobox.click();
     	hotelRoomsInput.type(rooms);
     	hotelAdultsInput.type(adults);
     	hotelCheckinDate.type(childs); 
     	hotelNationalitySelect.click();
-    	hotelNationalitySelect.select("Argentina");
-    	
+    	hotelNationalitySelect.select(nationality);
     	hotelSearchButton.click();
+    	LOGGER.info("[HOTEL]Selected destination " + cityName + " in field destination");
+    	LOGGER.info("[HOTEL]Selected date " + checkin + " in field checkin");
+    	LOGGER.info("[HOTEL]Selected date " + checkout + " in field checkout");
+    	LOGGER.info("[HOTEL]Selected rooms " + rooms + " in field rooms");
+    	LOGGER.info("[HOTEL]Selected adults " + adults + " in field adults");
+    	LOGGER.info("[HOTEL]Selected childs " + childs + " in field childs");
+    	LOGGER.info("[HOTEL]Selected childs " + nationality + " in field childs");
+    	
+    	return HotelsSearchResultPage(driver);
     }
     
-    public void flightsSearchForm(String flyingFrom, String toDestination, String departureDate, String adults, String childs, String infants) {
-    	
+    public FlightsSearchResultPage flightsSearchForm(String flyingFrom, String flyingTo, String departureDate, String adults, String childs, String infants) {
+    	String ftype = "Business";
+    	flightButton.click();
     	flightsRoundTripRadioButton.click();
-    	
     	flightsFlyingFromCombobox.click();
     	flightsFlyingFromCombobox.type(flyingFrom);
-    	flightsFlyingFromSearch.click();
-    	
+    	flightsFlyingFromSearchResult.click();
     	flightsFlyingToCombobox.click();
-    	flightsFlyingToCombobox.type(toDestination);
-    	flightsFlyingToSearch.click();
-    	
+    	flightsFlyingToCombobox.type(flyingTo);
+    	flightsFlyingToSearchResult.click();
     	flightsDepartureDate.click();
     	flightsDepartureDate.type(departureDate);
-    	
     	flightsTypeDropdown.click();
-    	flightsTypeDropdown.select("Business");
-    	
+    	flightsTypeDropdown.select(ftype);
     	flightsPassengersDropdown.click();
     	flightsAdults.type(adults);
     	flightsChilds.type(childs);
     	flightsInfants.type(infants);
+    	flightsSearchFlightButton.click(); 	
+    	LOGGER.info("[FLIGHTS]Selected city " + flyingFrom + " in field Flying from");
+    	LOGGER.info("[FLIGHTS]Selected city " + flyingTo + " in field Flying to");
+    	LOGGER.info("[FLIGHTS]Selected date " + departureDate + " in field Departure date");
+    	LOGGER.info("[FLIGHTS]Selected childs " + ftype + " in field childs");
+    	LOGGER.info("[FLIGHTS]Selected adults " + adults + " in field adults");
+    	LOGGER.info("[FLIGHTS]Selected childs " + childs + " in field childs");
+    	LOGGER.info("[FLIGHTS]Selected infants " + infants + " in field infants");
     	
-    	flightsSearchFlightButton.click();
-    
-    	
+    	return FlightsSearchResultPage(driver);
     }
     
-    public void toursSearchForm(String destination, String date, String adults, String childs) {
-    	
+    public ToursSearchResultPage toursSearchForm(String destination, String date, String adults, String childs) {
+    	toursButton.click();
     	toursDestinationTextbox.click();
     	universalInputField.type(destination);
     	universalSearchResult.click();
-    	
     	toursDate.click();
     	toursDate.type(date);
-    	
     	toursTravellersDropdown.click();
     	toursAdultsInput.type(adults);
     	toursChildsInput.type(childs);
+    	toursSearchButton.click();	
+    	LOGGER.info("[TOURS]Selected destination " + destination + " in field destination");
+    	LOGGER.info("[TOURS]Selected date " + date + " in field date");
+    	LOGGER.info("[TOURS]Selected adults " + adults + " in field adults");
+    	LOGGER.info("[TOURS]Selected childs " + childs + " in field childs");
     	
-    	toursSearchButton.click();
-    	
-    	
+    	return new ToursSearchResultPage(driver);
     }
    
     
-    public void visafillVisaSearchForm(String fromCountry, String toCountry, String date) {
-    	
+    public VisaFormPage visafillVisaSearchForm(String fromCountry, String toCountry, String date) {
+    	visaButton.click();
     	visaFromCountryComboBox.click();
     	universalInputField.type(fromCountry);
     	universalSearchResult.click();
-    	
     	visaToCountryComboBox.click();
     	universalInputField.type(toCountry);
     	universalSearchResult.click();
-    	
     	visaDate.click();
     	visaDate.type(date);
+    	visaButton.click();	
+    	LOGGER.info("[VISA]Selected fromCountry " + fromCountry + " in field from Country");
+    	LOGGER.info("[VISA]Selected toCountry " + toCountry + " in field to Country");
+    	LOGGER.info("[VISA]Selected date " + date + " in field date");
     	
-    	visaButton.click();		
+    	return new VisaFormPage(driver);
     }
     
 

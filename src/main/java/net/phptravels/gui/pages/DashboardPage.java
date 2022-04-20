@@ -1,4 +1,4 @@
-package net.phptravels.gui.login;
+package net.phptravels.gui.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
