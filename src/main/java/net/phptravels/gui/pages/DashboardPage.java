@@ -14,7 +14,7 @@ public class DashboardPage extends AbstractPage {
     public DashboardPage(WebDriver driver) {
         super(driver);
     }
-  
+
     public void compareTitle() {
         if (!driver.getTitle().equals("Hi, Demo Welcome Back")) {
             throw new IllegalStateException("This is not the dashboard of logged in user," +

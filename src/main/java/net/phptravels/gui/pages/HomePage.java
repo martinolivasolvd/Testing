@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.concurrent.TimeUnit;
 
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
@@ -149,15 +150,16 @@ public class HomePage extends AbstractPage {
         String nationality = "Argentina";
         hotelDestinationCombobox.click();
         universalInputField.type(cityName);
+        pause(5);
         universalSearchResult.click();
-        hotelCheckinDate.click();
-        hotelCheckinDate.type(checkin);
-        hotelCheckoutDate.click();
-        hotelCheckoutDate.type(checkout);
+        //hotelCheckinDate.click();
+        //hotelCheckinDate.type(checkin);
+        //hotelCheckoutDate.click();
+        //hotelCheckoutDate.type(checkout);
         hotelTravellersCombobox.click();
         hotelRoomsInput.type(rooms);
         hotelAdultsInput.type(adults);
-        hotelCheckinDate.type(childs);
+        hotelChildsInput.type(childs);
         hotelNationalitySelect.click();
         hotelNationalitySelect.select(nationality);
         hotelSearchButton.click();
@@ -167,7 +169,7 @@ public class HomePage extends AbstractPage {
         LOGGER.info("[HOTEL]Selected rooms " + rooms + " in field rooms");
         LOGGER.info("[HOTEL]Selected adults " + adults + " in field adults");
         LOGGER.info("[HOTEL]Selected childs " + childs + " in field childs");
-        LOGGER.info("[HOTEL]Selected childs " + nationality + " in field childs");
+        LOGGER.info("[HOTEL]Selected nationality " + nationality + " in field nationality");
 
         return new HotelsSearchResultPage(driver);
     }
