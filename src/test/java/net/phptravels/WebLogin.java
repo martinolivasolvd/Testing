@@ -16,11 +16,47 @@ public class WebLogin implements IAbstractTest {
     @MethodOwner(owner = "qpsdemo")
     @TestPriority(Priority.P3)
     @TestLabel(name = "feature", value = {"web", "regression"})
-    public void testModelSpecs() {
+    public void testHotelsFillForm() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         homePage = new HomePage(getDriver());
         homePage.hotelFillForm("Coffee",  "24-04-2022", "25-04-2022", "5", "3", "1");
     }
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    @TestPriority(Priority.P3)
+    @TestLabel(name = "feature", value = {"web", "regression"})
+    public void testFlightsFillForm() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        homePage = new HomePage(getDriver());
+        homePage.flightsFillForm("ask",  "asd", "25-04-2022", "28-04-2022", "5", "3", "1");
+    }
+
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    @TestPriority(Priority.P3)
+    @TestLabel(name = "feature", value = {"web", "regression"})
+    public void testToursFillForm() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        homePage = new HomePage(getDriver());
+        homePage.toursFillForm("ght",  "25-04-2022", "3", "6");
+    }
+
+    @Test()
+    @MethodOwner(owner = "qpsdemo")
+    @TestPriority(Priority.P3)
+    @TestLabel(name = "feature", value = {"web", "regression"})
+    public void testVisaFillForm() {
+        HomePage homePage = new HomePage(getDriver());
+        homePage.open();
+        Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
+        homePage = new HomePage(getDriver());
+        homePage.visaFillForm("al",  "Man", "25-04-2022");
+    }
+
 }

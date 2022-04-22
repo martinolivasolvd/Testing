@@ -4,10 +4,13 @@ import java.lang.invoke.MethodHandles;
 
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.R;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -65,13 +68,16 @@ public class HomePage extends AbstractPage {
     private ExtendedWebElement flightsTypeDropdown;
 
     @FindBy(xpath = "//input[@id = 'autocomplete']")
-    private ExtendedWebElement flightsFlyingFromCombobox;
+    private ExtendedWebElement  flightsFlyingFromCombobox;
 
     @FindBy(xpath = "//input[@id = 'autocomplete2']")
     private ExtendedWebElement flightsFlyingToCombobox;
 
     @FindBy(xpath = "//div[@id = 'flights']//input[@class = 'depart form-control']")
     private ExtendedWebElement flightsDepartureDate;
+
+    @FindBy(xpath = "//div//label[text()='Return Date']")
+    private ExtendedWebElement flightsReturnDate;
 
     @FindBy(xpath = "//div[@id = 'flights']//a[@class = 'dropdown-toggle dropdown-btn waves-effect']")
     private ExtendedWebElement flightsPassengersDropdown;
@@ -130,6 +136,10 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//div[@id='visa']//button[@type = 'submit']")
     private ExtendedWebElement visaSubmitButton;
 
+    //
+    @FindBy(xpath = "h2[text()='Top Flight Destinations']")
+    private ExtendedWebElement TopFlightsTitle;
+
     @FindBy(xpath = "//input[@class='select2-search__field']")
     private ExtendedWebElement universalInputField;
 
@@ -150,9 +160,10 @@ public class HomePage extends AbstractPage {
         String nationality = "Argentina";
         hotelDestinationCombobox.click();
         universalInputField.type(cityName);
-        pause(5);
+        pause(3);
         universalSearchResult.click();
-        //hotelCheckinDate.click();
+        hotelCheckinDate.click();
+        pause(3);
         //hotelCheckinDate.type(checkin);
         //hotelCheckoutDate.click();
         //hotelCheckoutDate.type(checkout);
@@ -174,18 +185,21 @@ public class HomePage extends AbstractPage {
         return new HotelsSearchResultPage(driver);
     }
 
-    public FlightsSearchResultPage flightsFillForm(String flyingFrom, String flyingTo, String departureDate, String adults, String childs, String infants) {
+    public FlightsSearchResultPage flightsFillForm(String flyingFrom, String flyingTo, String departureDate,String returnDate, String adults, String childs, String infants) {
         String ftype = "Business";
         flightButton.click();
         flightsRoundTripRadioButton.click();
         flightsFlyingFromCombobox.click();
         flightsFlyingFromCombobox.type(flyingFrom);
+        pause(2);
         flightsFlyingFromSearchResult.click();
         flightsFlyingToCombobox.click();
         flightsFlyingToCombobox.type(flyingTo);
+        pause(2);
         flightsFlyingToSearchResult.click();
-        flightsDepartureDate.click();
-        flightsDepartureDate.type(departureDate);
+        //flightsDepartureDate.click();
+        //flightsReturnDate.click();
+        //flightsDepartureDate.type(departureDate);
         flightsTypeDropdown.click();
         flightsTypeDropdown.select(ftype);
         flightsPassengersDropdown.click();
@@ -208,9 +222,10 @@ public class HomePage extends AbstractPage {
         toursButton.click();
         toursDestinationTextbox.click();
         universalInputField.type(destination);
+        pause(3);
         universalSearchResult.click();
         toursDate.click();
-        toursDate.type(date);
+        //toursDate.type(date);
         toursTravellersDropdown.click();
         toursAdultsInput.type(adults);
         toursChildsInput.type(childs);
@@ -230,9 +245,11 @@ public class HomePage extends AbstractPage {
         universalSearchResult.click();
         visaToCountryComboBox.click();
         universalInputField.type(toCountry);
+        TopFlightsTitle.scrollTo();
         universalSearchResult.click();
+
         visaDate.click();
-        visaDate.type(date);
+        //visaDate.type(date);
         visaButton.click();
         LOGGER.info("[VISA]Selected fromCountry " + fromCountry + " in field from Country");
         LOGGER.info("[VISA]Selected toCountry " + toCountry + " in field to Country");
