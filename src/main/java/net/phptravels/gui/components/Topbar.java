@@ -10,42 +10,44 @@ import com.qaprosoft.carina.demo.gui.pages.HomePage;
 
 public class Topbar extends AbstractUIObject {
 	
-	@FindBy(linkText = "Home")
+	@FindBy(xpath = "//a[text()='Home']")
     private ExtendedWebElement homeLink;
 
-    @FindBy(linkText = "Hotels")
+    @FindBy(xpath = "//a[text()='Hotels']")
     private ExtendedWebElement hotelsLink;
     
-    @FindBy(linkText = "Flights")
+    @FindBy(xpath = "//a[text()='flights']")
     private ExtendedWebElement flightsLink;
     
-    @FindBy(linkText = "Tours")
+    @FindBy(xpath = "//a[text()='Tours']")
     private ExtendedWebElement toursLink;
     
-    @FindBy(linkText = "Visa")
+    @FindBy(xpath = "//a[text()='visa']")
     private ExtendedWebElement visaLink;
     
-    @FindBy(linkText = "Blog")
+    @FindBy(xpath = "//a[text()='Blog']")
     private ExtendedWebElement blogLink;
     
-    @FindBy(linkText = "Offer")
+    @FindBy(xpath = "//a[text()='Offers']")
     private ExtendedWebElement offerLink;
 
-    @FindBy(linkText = "Company")
+    @FindBy(xpath = "//div/nav/ul//li/a[text()='Company ']")
     private ExtendedWebElement companyLink;
     
-    @FindBy(xpath = "//a[contains(text(),'Signup')]")
+    @FindBy(xpath = "//div/a[contains(text(),'Signup')]")
     private ExtendedWebElement signupButton;
     
-    @FindBy(xpath = "//a[contains(text(),'Login')]")
+    @FindBy(xpath = "//div/a[contains(text(),'Login')]")
     private ExtendedWebElement loginButton;
 
     public Topbar(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
-
     public HomePage openHomePage() {
         homeLink.click();
         return new HomePage(driver);
+    }
+    public void clickLogin(){
+        loginButton.click();
     }
 }

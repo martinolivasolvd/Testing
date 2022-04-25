@@ -4,15 +4,10 @@ import java.lang.invoke.MethodHandles;
 
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.R;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
@@ -25,6 +20,9 @@ public class HomePage extends AbstractPage {
 
     @FindBy(xpath = "//header[@class ='header-area']")
     private Topbar topbar;
+
+    @FindBy(xpath = "//div/a[@href='https://phptravels.net/login']")
+    private ExtendedWebElement loginButton;
 
     @FindBy(xpath = "//button[@id = 'hotels-tab']//span[text() = ' Hotels']")
     private ExtendedWebElement hotelButton;
@@ -156,7 +154,6 @@ public class HomePage extends AbstractPage {
         return topbar;
     }
 
-
     public HotelsSearchResultPage hotelFillForm(String cityName, String checkin, String checkout, String rooms, String adults, String childs) {
         String nationality = "Argentina";
         hotelDestinationCombobox.click();
@@ -247,9 +244,7 @@ public class HomePage extends AbstractPage {
         visaToCountryComboBox.click();
         universalInputField.type(toCountry);
         visaFromCountryComboBox.scrollTo();
-        //visaFromCountryComboBox.scrollTo();
         universalSearchResult.click();
-
         visaDate.click();
         //visaDate.type(date);
         visaSubmitButton.click();
@@ -258,5 +253,9 @@ public class HomePage extends AbstractPage {
         LOGGER.info("[VISA]Selected date " + date + " in field date");
 
         return new VisaFormPage(driver);
+    }
+    public LoginPage loginForm(){
+        topbar.clickLogin();
+        return new LoginPage(driver);
     }
 }

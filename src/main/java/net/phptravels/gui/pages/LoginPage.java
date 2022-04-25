@@ -1,12 +1,13 @@
 package net.phptravels.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
-public class SignInPage extends AbstractPage {
+public class LoginPage extends AbstractPage {
 
   @FindBy(xpath = "//div[@class='form-group']/input[@name='email']")
   private ExtendedWebElement emailField;
@@ -20,13 +21,13 @@ public class SignInPage extends AbstractPage {
   @FindBy(xpath = "//div[@class = 'btn-box pt-3 pb-4']//button[@type='submit']")
   private ExtendedWebElement loginButton;
 
-  public SignInPage(WebDriver driver){
-    super(driver);
+  public LoginPage(WebDriver driver){
+      super(driver);
+      setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+      setUiLoadedMarker(emailField);
   }
 
-  public DashboardPage loginValidUser() {
-	  String email = "user@phptravels.com";
-	  String password = "demouser";
+  public DashboardPage loginFillForm(String email,String password) {
 	  emailField.click();
 	  emailField.type(email);
 	  passwordField.click();

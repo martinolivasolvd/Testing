@@ -1,5 +1,6 @@
 package net.phptravels.gui.pages;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -8,11 +9,13 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 
 public class DashboardPage extends AbstractPage {
 
-    @FindBy(tagName = "h2")
+    @FindBy(xpath = "//h2[text() = 'Hi, ']")
     private ExtendedWebElement messageTitle;
 
     public DashboardPage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(messageTitle);
     }
 
     public void compareTitle() {
