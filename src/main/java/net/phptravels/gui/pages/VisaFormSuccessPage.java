@@ -1,5 +1,6 @@
 package net.phptravels.gui.pages;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,10 +19,9 @@ public class VisaFormSuccessPage extends AbstractPage {
 
     public VisaFormSuccessPage(WebDriver driver) {
         super(driver);
+        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+        setUiLoadedMarker(messageTitle);
     }
-    public boolean isVisaFormSubmittedMessagePresent() {
-        return messageTitle.isElementPresent();
-        }
     }
 
 

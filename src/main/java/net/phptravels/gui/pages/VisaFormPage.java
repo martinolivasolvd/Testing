@@ -1,5 +1,6 @@
 package net.phptravels.gui.pages;
 
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -12,7 +13,9 @@ public class VisaFormPage extends AbstractPage {
 
 	 @FindBy(xpath = "//header[@class ='header-area']")
 	 	private Topbar topbar;
-	
+
+	@FindBy(xpath = "//h3[text() = 'Submission Form']")
+	private ExtendedWebElement visaTitle;
 	 @FindBy(xpath = "//input[@name = 'first_name']")
 	    private ExtendedWebElement firstNameInput;
 	 
@@ -28,7 +31,7 @@ public class VisaFormPage extends AbstractPage {
 	 @FindBy(xpath = "//input[@name = 'date']")
 	    private ExtendedWebElement dateInput;
 
-	 @FindBy(xpath = "//input[@name = 'notes']")
+	 @FindBy(xpath = "//div//textarea[@name='notes']")
 	    private ExtendedWebElement notesInput;
 	 
 	 @FindBy(xpath = "//div//button[@id = 'submit']")
@@ -36,13 +39,10 @@ public class VisaFormPage extends AbstractPage {
 	 
 	 
 public VisaFormPage(WebDriver driver){
-    super(driver);
+	super(driver);
+	setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
+	setUiLoadedMarker(visaTitle);
   }
-
-public boolean isPageOpened() {
-	//pass
-	return false;
-}
 
 public VisaFormSuccessPage fillVisaForm(String firstName, String lastName, String email, String phone, String date, String notes) {
 	firstNameInput.click();
@@ -54,13 +54,12 @@ public VisaFormSuccessPage fillVisaForm(String firstName, String lastName, Strin
 	phoneInput.click();
 	phoneInput.type(phone);
 	dateInput.click();
-	dateInput.type(date);
+	//dateInput.type(date);
 	notesInput.click();
 	notesInput.type(notes);
+	//submitButton.scrollTo();
 	submitButton.click();
 	
 	return new VisaFormSuccessPage(driver);
-	
 }
-
 }

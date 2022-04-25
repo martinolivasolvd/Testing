@@ -5,6 +5,7 @@ import java.lang.invoke.MethodHandles;
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -137,7 +138,7 @@ public class HomePage extends AbstractPage {
     private ExtendedWebElement visaSubmitButton;
 
     //
-    @FindBy(xpath = "h2[text()='Top Flight Destinations']")
+    @FindBy(xpath = "//div/h4[text()='Travel to anytime, anywhere']")
     private ExtendedWebElement TopFlightsTitle;
 
     @FindBy(xpath = "//input[@class='select2-search__field']")
@@ -245,12 +246,13 @@ public class HomePage extends AbstractPage {
         universalSearchResult.click();
         visaToCountryComboBox.click();
         universalInputField.type(toCountry);
-        TopFlightsTitle.scrollTo();
+        visaFromCountryComboBox.scrollTo();
+        //visaFromCountryComboBox.scrollTo();
         universalSearchResult.click();
 
         visaDate.click();
         //visaDate.type(date);
-        visaButton.click();
+        visaSubmitButton.click();
         LOGGER.info("[VISA]Selected fromCountry " + fromCountry + " in field from Country");
         LOGGER.info("[VISA]Selected toCountry " + toCountry + " in field to Country");
         LOGGER.info("[VISA]Selected date " + date + " in field date");
