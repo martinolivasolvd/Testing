@@ -1,9 +1,11 @@
 package net.phptravels;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
+import com.qaprosoft.carina.core.foundation.utils.R;
 import net.phptravels.gui.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import net.phptravels.gui.utils.AuthService;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,25 +14,14 @@ import java.util.Properties;
 
 
 public class WebLogin implements IAbstractTest {
-    Properties properties = new Properties();
-    {
-        try {
-            FileInputStream inputstream = new FileInputStream("/Users/solvd/Testing/src/main/resources/_testdata.properties");
-            properties.load(inputstream);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
     @Test()
     public void testLoginPage() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        LoginPage loginPage = homePage.loginForm();
+        LoginPage loginPage = homePage.clickLoginButton();
         Assert.assertTrue(loginPage.isPageOpened(), "SignIn page is not opened");
-        DashboardPage userDashboard = loginPage.loginFillForm(properties.getProperty("testEmail"),properties.getProperty("testPassword"));
+        DashboardPage userDashboard = new AuthService().loginFillForm(R.TESTDATA.get("testEmail"),R.TESTDATA.get("testPassword"));
         Assert.assertTrue(userDashboard.isPageOpened(), "Dashboard page is not opened");
     }
     @Test()

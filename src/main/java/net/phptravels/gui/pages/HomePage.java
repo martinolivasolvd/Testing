@@ -4,6 +4,7 @@ import java.lang.invoke.MethodHandles;
 
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.utils.R;
+import net.phptravels.gui.components.Calendar;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
@@ -20,6 +21,9 @@ public class HomePage extends AbstractPage {
 
     @FindBy(xpath = "//header[@class ='header-area']")
     private Topbar topbar;
+
+    @FindBy(xpath = "/html/body/div[8]/div[1]/table")
+    private Calendar calendar;
 
     @FindBy(xpath = "//div/a[@href='https://phptravels.net/login']")
     private ExtendedWebElement loginButton;
@@ -145,6 +149,9 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//span[@class='select2-results']//li")
     private ExtendedWebElement universalSearchResult;
 
+    @FindBy(xpath = "//div//button[@id = 'cookie_stop']")
+    private ExtendedWebElement cookieCloseButton;
+
     public HomePage(WebDriver driver) {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get(Configuration.Parameter.URL.getKey()));
@@ -153,6 +160,8 @@ public class HomePage extends AbstractPage {
     public Topbar topbar() {
         return topbar;
     }
+
+    public Calendar calendar() {return calendar;}
 
     public HotelsSearchResultPage hotelFillForm(String cityName, String checkin, String checkout, String rooms, String adults, String childs) {
         String nationality = "Argentina";
@@ -237,6 +246,7 @@ public class HomePage extends AbstractPage {
     }
 
     public VisaFormPage visaFillForm(String fromCountry, String toCountry, String date) {
+        cookieCloseButton.click();
         visaButton.click();
         visaFromCountryComboBox.click();
         universalInputField.type(fromCountry);
@@ -246,6 +256,10 @@ public class HomePage extends AbstractPage {
         visaFromCountryComboBox.scrollTo();
         universalSearchResult.click();
         visaDate.click();
+        //calendar.clickNextMonthArrowButton();
+        //calendar.clickNextMonthArrowButton();
+        //calendar.clickPreviousMonthArrowButton();
+        calendar.clickavailableCalendarDays();
         //visaDate.type(date);
         visaSubmitButton.click();
         LOGGER.info("[VISA]Selected fromCountry " + fromCountry + " in field from Country");
@@ -254,7 +268,7 @@ public class HomePage extends AbstractPage {
 
         return new VisaFormPage(driver);
     }
-    public LoginPage loginForm(){
+    public LoginPage clickLoginButton(){
         topbar.clickLogin();
         return new LoginPage(driver);
     }

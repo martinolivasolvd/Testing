@@ -57,7 +57,6 @@ public VisaFormSuccessPage fillVisaForm(String firstName, String lastName, Strin
 	//dateInput.type(date);
 	notesInput.click();
 	notesInput.type(notes);
-	//submitButton.scrollTo();
 	submitButton.click();
 	
 	return new VisaFormSuccessPage(driver);
