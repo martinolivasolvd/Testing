@@ -27,36 +27,13 @@ public class LoginPage extends AbstractPage {
       setUiLoadedMarker(emailField);
   }
 
-    public ExtendedWebElement getEmailField() {
-        return emailField;
+    public void setEmailField(String email) {
+        emailField.type(email);
     }
 
-    public void setEmailField(String emailField) {
-        this.emailField.type(emailField);
+    public void setPasswordField(String password) {passwordField.type(password);}
+    public void clickLoginButton(){
+      loginButton.click();
     }
-
-    public ExtendedWebElement getPasswordField() {
-        return passwordField;
     }
-
-    public void setPasswordField(String passwordField) {
-        this.passwordField.type(passwordField);
-    }
-
-    public ExtendedWebElement getRememberMeCheckButton() {
-        return rememberMeCheckButton;
-    }
-
-    public void setRememberMeCheckButton(ExtendedWebElement rememberMeCheckButton) {
-        this.rememberMeCheckButton = rememberMeCheckButton;
-    }
-
-    public ExtendedWebElement getLoginButton() {
-        return loginButton;
-    }
-
-    public void setLoginButton(ExtendedWebElement loginButton) {
-        this.loginButton = loginButton;
-    }
-}
 

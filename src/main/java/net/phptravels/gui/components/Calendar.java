@@ -21,14 +21,14 @@ public class Calendar extends AbstractUIObject {
     }
 
     public void clickNextMonthArrowButton(){
-        nextMonthArrowButton.click();
+        nextMonthArrowButton.clickByJs();
     }
 
     public void clickPreviousMonthArrowButton(){
         previousMonthArrowButton.click();
     }
 
-    public void clickavailableCalendarDays(){
+    public void clickAvailableCalendarDays(){
         availableCalendarDays.clickByJs();
     }
 }

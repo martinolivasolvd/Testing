@@ -14,11 +14,9 @@ public class AuthService implements IDriverPool {
 
     public DashboardPage loginFillForm(String email,String password) {
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.getEmailField().click();
         loginPage.setEmailField(email);
-        loginPage.getPasswordField().click();
         loginPage.setPasswordField(password);
-        loginPage.getLoginButton().click();
+        loginPage.clickLoginButton();
 
         return new DashboardPage(getDriver());
     }

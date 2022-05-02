@@ -1,8 +1,10 @@
 package net.phptravels.gui.utils;
 
 import com.qaprosoft.carina.core.foundation.utils.R;
+import com.qaprosoft.carina.core.foundation.webdriver.IDriverPool;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -11,12 +13,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.logging.Logger;
 
-import static com.zebrunner.agent.core.webdriver.RemoteWebDriverFactory.getDriver;
-
-public class TakeScreenshot {
-    private final static Logger LOGGER = (Logger) LogManager.getLogger(TakeScreenshot.class);
+public class TakeScreenshotService implements IDriverPool {
+    private final static Logger LOGGER = LogManager.getLogger(TakeScreenshotService.class);
 
     public void makeScreenshot() {
         File outputfile = new File(FilenameUtils.normalize(R.TESTDATA.get("path")+ LocalDateTime.now() + ".png"));
