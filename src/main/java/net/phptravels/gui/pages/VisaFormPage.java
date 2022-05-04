@@ -45,17 +45,11 @@ public VisaFormPage(WebDriver driver){
   }
 
 public VisaFormSuccessPage fillVisaForm(String firstName, String lastName, String email, String phone, String date, String notes) {
-	firstNameInput.click();
 	firstNameInput.type(firstName);
-	lastNameInput.click();
 	lastNameInput.type(lastName);
-	emailInput.click();
 	emailInput.type(email);
-	phoneInput.click();
 	phoneInput.type(phone);
 	dateInput.click();
-	//dateInput.type(date);
-	notesInput.click();
 	notesInput.type(notes);
 	submitButton.click();
 	

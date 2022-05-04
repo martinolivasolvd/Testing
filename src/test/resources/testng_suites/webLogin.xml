@@ -12,5 +12,4 @@
 			<class name="net.phptravels.WebLogin" />
 		</classes>
 	</test>
-
 </suite>

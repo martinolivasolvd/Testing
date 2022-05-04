@@ -172,9 +172,6 @@ public class HomePage extends AbstractPage {
         universalSearchResult.click();
         hotelCheckinDate.click();
         pause(3);
-        //hotelCheckinDate.type(checkin);
-        //hotelCheckoutDate.click();
-        //hotelCheckoutDate.type(checkout);
         hotelTravellersCombobox.click();
         hotelRoomsInput.type(rooms);
         hotelAdultsInput.type(adults);
@@ -197,17 +194,14 @@ public class HomePage extends AbstractPage {
         String ftype = "Business";
         flightButton.click();
         flightsRoundTripRadioButton.click();
-        flightsFlyingFromCombobox.click();
         flightsFlyingFromCombobox.type(flyingFrom);
         pause(2);
         flightsFlyingFromSearchResult.click();
-        flightsFlyingToCombobox.click();
         flightsFlyingToCombobox.type(flyingTo);
         pause(2);
         flightsFlyingToSearchResult.click();
-        //flightsDepartureDate.click();
-        //flightsReturnDate.click();
-        //flightsDepartureDate.type(departureDate);
+        flightsDepartureDate.click();
+        flightsReturnDate.click();
         flightsTypeDropdown.click();
         flightsTypeDropdown.select(ftype);
         flightsPassengersDropdown.click();
@@ -256,7 +250,6 @@ public class HomePage extends AbstractPage {
         universalInputField.type(toCountry);
         visaFromCountryComboBox.scrollTo();
         universalSearchResult.click();
-        new TakeScreenshotService().makeScreenshot("TestScreenshot");
         visaDate.click();
         calendar.clickNextMonthArrowButton();
         pause(1);
